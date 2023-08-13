@@ -47,6 +47,7 @@ fun_desc_t cmd_table[] = {
     {cmd_help, "?", "show this help menu"},
     {cmd_exit, "exit", "exit the command shell"},
     {cmd_pwd, "pwd", "print working directory"},
+    {cmd_cd, "cd", "change working directory"},
 };
 
 /* Prints a helpful description for the given command */
@@ -67,6 +68,16 @@ int cmd_pwd(unused struct tokens* tokens) {
   return 1;
 }
 
+
+/* cd*/
+int cmd_cd(unused struct tokens* tokens) {
+  char *path = tokens_get_token(tokens, 1);
+  if (chdir(path) == -1) {
+    // puts("error!");
+    return -1;
+  }
+  return 1;
+}
 
 /* Looks up the built-in command, if it exists. */
 int lookup(char cmd[]) {
