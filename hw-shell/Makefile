@@ -1,5 +1,6 @@
 SRCS=shell.c tokenizer.c
 EXECUTABLES=shell
+HELPS=process1 process2 process3
 
 CC=gcc
 CFLAGS=-g3 -Wall -std=gnu99
@@ -14,5 +15,10 @@ $(EXECUTABLES): $(OBJS)
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
 
+shell: $(HELPS)
+
+%: %.c
+	$(CC) $(CFLAGS) $^ -o $@
+
 clean:
-	rm -rf $(EXECUTABLES) $(OBJS)
+	rm -rf $(EXECUTABLES) $(OBJS) $(HELPS)
